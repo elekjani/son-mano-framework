@@ -1,0 +1,38 @@
+version: '3'
+
+networks:
+  service_network:
+    external: true
+
+services:
+  son-mano-specific-manager-registry:
+    build:
+      context: .
+      dockerfile: ./son-mano-specificmanager/son-mano-specific-manager-registry/Dockerfile
+    image: son-mano-specific-manager-registyr:SNAPSHOT
+    container_name: son-mano-specific-manager-registry
+    networks:
+      - service_network
+    restart: always
+
+  son-mano-pluginmanager:
+    build:
+      context: .
+      dockerfile: ./son-mano-pluginmanager/Dockerfile
+    image: son-mano-pluginmanager:SNAPSHOT
+    container_name: son-mano-pluginmanager
+    networks:
+      - service_network
+    restart: always
+
+  son-mano-service-lifecycle-management:
+    build:
+      context: .
+      dockerfile: ./plugins/son-mano-service-lifecycle-management/Dockerfile
+    image: son-service-lifecycle-management:SNAPSHOT
+    container_name: son-service-lifecycle-management
+    networks:
+      - service_network
+    restart: always
+    depends_on:
+      - son-mano-pluginmanager
