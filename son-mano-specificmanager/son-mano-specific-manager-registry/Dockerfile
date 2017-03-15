@@ -7,13 +7,12 @@ ENV mongo_port 27017
 ENV broker_name broker,broker
 ENV broker_host amqp://guest:guest@broker:5672/%2F
 ENV broker_exchange son-kernel
-ENV DOCKER_HOST unix://var/run/docker.sock
+ENV DOCKER_HOST unix://varrun/docker.sock
 
 
 ADD son-mano-base /son-mano-base
 ADD son-mano-specificmanager/son-mano-specific-manager-registry /son-mano-specific-manager-registry
 ADD utils/delayedstart.sh /delayedstart.sh
-
 
 WORKDIR /son-mano-base
 RUN python setup.py install

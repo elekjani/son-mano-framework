@@ -13,6 +13,8 @@ services:
     container_name: son-mano-specific-manager-registry
     networks:
       - service_network
+    volumes:
+      - /var/run:/varrun
     restart: always
 
   son-mano-pluginmanager:
